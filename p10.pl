@@ -23,10 +23,10 @@ for my $i (2..sqrt($limit)) {
 		}
 	}
 }
+
+# add up all the primes
 my $sum = 0;
-# push prime indexes onto a list
 for (2..$#list) {
-	#push @primes, $_ if $list[$_];
 	$sum += $_ if $list[$_];
 }
 
