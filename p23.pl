@@ -8,8 +8,9 @@ use Time::HiRes qw(gettimeofday tv_interval);
 # Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 my $t0 = [gettimeofday()];
 
-my %abundant;
+my @abundants;
 
+my $numCalcs = 0;
 sub sum_divisors {
 	my $sum = 0;
 	my $composite = shift;
@@ -23,32 +24,22 @@ sub sum_divisors {
 	$sum;
 }
 
-sub summable {
-	my $num = shift;
-	for (keys %abundant) {
-		#last if ($_ > $num);
-		return 1 if (exists $abundant{$num - $_});
-	}
-	#say "$num is not summable";
-	return 0;
-}
-
-
-
 for (2..28123) {
-	$abundant{$_} = 0 if (sum_divisors($_) > $_);
+	push @abundants, $_ if (sum_divisors($_) > $_);
 }
 
-#print "$_ " for (sort {$a <=> $b}keys %abundant);
-#print "\n";
+# hash table of sums of abundants
+my %sums;
+for my $i (0..$#abundants) {
+	$sums{$abundants[$i] + $abundants[$_]} = 0 for ($i..$#abundants);
+}
+
+# go through all the numbers and add them up if they aren't in the sum hash
 my $sum = 0;
-my @unsums;
 for (1..28123) {
-	$sum += $_ unless summable($_);
+	$sum += $_ unless (exists $sums{$_});
 }
 
-#say scalar @unsums;
-#$sum += $_ for @unsums;
 say "Sum of non-summable abundant numbers: $sum";
 
 say "\nFinished in ",tv_interval($t0, [gettimeofday()]) ," seconds.";
