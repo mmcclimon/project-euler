@@ -8,13 +8,14 @@ use Time::HiRes qw(gettimeofday tv_interval);
 # Evaluate the sum of all amicable pairs under 10000.
 my $t0 = [gettimeofday()];
 
-my $numCalcs = 0;
 sub sum_divisors {
-	$numCalcs++;
 	my $sum = 0;
 	my $composite = shift;
-	for (1..$composite/2) {
-		$sum += $_ if ($composite % $_ == 0);
+	for (1..sqrt($composite)) {
+		if ($composite % $_ == 0) {
+			$sum += $_;
+			$sum += ($composite / $_) if ($_ > 1);
+		}
 	}
 	$sum;
 }
@@ -29,12 +30,11 @@ for (2..10000) {
 		push @amicables, ($aliquots{$_}, $_) if ($aliquots{$sum} == $_ && $_ != $sum);
 	}
 }
-#say "@amicables";
+say "@amicables";
 
 my $sum = 0;
 $sum += $_ for @amicables;
 
 say "Sum of all amicable pairs < 10,000: $sum";
-say "Did $numCalcs calculations...";
 
 say "\nFinished in ",tv_interval($t0, [gettimeofday()]) ," seconds.";
