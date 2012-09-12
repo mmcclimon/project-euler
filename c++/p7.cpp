@@ -4,14 +4,15 @@
 // returns a vector of prime numbers <= limit
 std::vector<int> Sieve(const unsigned int& limit) {
 
-	std::vector<char> sieve (limit, '1');
+	static std::vector<char> sieve (limit, '1');
 	static std::vector<int> retVector;
 	static unsigned int lastPrime = 2;
-
+	sieve.resize(limit);
 	//std::cout << "in Sieve, lastPrime = " << lastPrime << std::endl;
 	
 	// fill it with 0s
-	for (unsigned int i = 0; i < limit; ++i) 
+	for (unsigned int i = (sieve.size() == 0 ) ? 0 : lastPrime;
+		   	i < limit; ++i) 
 		sieve[i] = 1;
 
 	// after this block, prime indexes all have 1s
