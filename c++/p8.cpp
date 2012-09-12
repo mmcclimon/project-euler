@@ -23,9 +23,6 @@ int main()
 	int biggest = 0;
 	deque<int> next5 (num.begin(), num.begin() + 5);
 
-	for (unsigned int i=0; i < next5.size(); ++i) 
-		std::cout << next5[i] << " ";
-
 	for (unsigned int i=5; i < num.length() - 4; ++i) {
 		int prod = getProd(next5);
 		
@@ -35,6 +32,8 @@ int main()
 		next5.pop_front();
 		next5.push_back(num[i]);
 
+		if (next5.back() == '0')
+			i += 4;		// if there's a 0, we can skip ahead a bit
 
 	}
 
