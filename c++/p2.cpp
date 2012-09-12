@@ -1,6 +1,8 @@
 #include <iostream>
+#include "timer.h"
 
 int main() {
+	Timer::start();
 	
 	long last = 1, penult = 0;
 	long sum = 0;
@@ -16,6 +18,6 @@ int main() {
 
 	std::cout << "Sum of even-valued fibs: " << sum << std::endl;
 
-
+	Timer::stop();
 	return 0;
 }

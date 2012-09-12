@@ -1,11 +1,13 @@
 #include <iostream>
 #include <math.h>
+#include "timer.h"
 
 const long long TARGET = 600851475143LL;
 
 int main() {
 	using namespace std;
-
+	Timer::start();
+	
 	double root = sqrt(TARGET);
 	const unsigned int LIMIT = (int) root;
 	char sieve[LIMIT];
@@ -40,5 +42,6 @@ int main() {
 
 	std::cout << "\nLargest prime: " << largestPrime << "\n";
 
+	Timer::stop();
 	return 0;
 }

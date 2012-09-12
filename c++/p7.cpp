@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <time.h>
+#include "timer.h"
+
 // returns a vector of prime numbers <= limit
 std::vector<int> Sieve(const unsigned int& limit) {
 
@@ -41,7 +42,7 @@ std::vector<int> Sieve(const unsigned int& limit) {
 int main()
 {
 	using namespace std;
-	clock_t start = clock();
+	Timer::start();
 
 	vector<int> primes;
 
@@ -53,6 +54,5 @@ int main()
 
 	cout << "10000th prime = " << primes[10000] << endl;
 
-	double elapsed = (double)(clock() - start) / CLOCKS_PER_SEC;
-	printf( "Finished in %f seconds\n", elapsed);
+	Timer::stop();
 }

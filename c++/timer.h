@@ -3,12 +3,12 @@
 class Timer
 {
 	public:
-		static void startTimer()
+		static void start()
 		{
 			start_time = clock();
 
 		}
-		static void stopTimer()
+		static void stop()
 		{
 			double elapsed = (double)(clock() - start_time) / CLOCKS_PER_SEC;
 			printf( "Finished in %f seconds.\n", elapsed);

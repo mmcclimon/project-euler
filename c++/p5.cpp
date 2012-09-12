@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include "timer.h"
 
 typedef unsigned int uint;
 

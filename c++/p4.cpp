@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include "timer.h"
 
 std::string toString(int& i) {
 	std::stringstream out;
@@ -12,7 +13,8 @@ std::string toString(int& i) {
 int main()
 {
 	using namespace std;
-
+	Timer::start();
+	
 	int biggest = 0;
 
 	for (int i=100; i < 1000; ++i)
@@ -35,4 +37,5 @@ int main()
 	}
 
 	cout << biggest << endl;
+	Timer::stop();
 }

@@ -2,13 +2,15 @@
 #include <vector>
 #include <math.h>
 #include "sieve.h"
+#include "timer.h"
 
 typedef unsigned int uint;
 
 int main()
 {
 	using namespace std;
-
+	Timer::start();
+	
 	uint limit = 20;
 	vector<int> primes = Sieve(limit);
 
@@ -29,5 +31,5 @@ int main()
 		lcm *= factors[i];
 
 	cout << "Least common multiple: " << lcm << endl;
-
+	Timer::stop();
 }
