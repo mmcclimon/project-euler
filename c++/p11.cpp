@@ -1,13 +1,6 @@
 #include <iostream>
 #include "timer.h"
 
-int getProduct(int* a, int* b, int* c, int* d)
-{
-	int product = *a * *b * *c * *d;
-	return product;
-}
-
-// I'm not sure why I needed to overload this
 int getProduct(int a, int b, int c, int d)
 {
 	int product = a * b * c * d;
@@ -53,8 +46,8 @@ int main()
 
 	for (unsigned int i=0; i < 17; ++i) {
 		// first, do rows and cols
-		int rowProd = getProduct(rows[i], rows[i+1], rows[i+2], rows[i+3]);
-		int colProd = getProduct(columns[i], columns[i+1], columns[i+2], columns[i+3]);
+		int rowProd = getProduct(rows[i][0], rows[i][1], rows[i][2], rows[i][3]);
+		int colProd = getProduct(columns[i][0], columns[i][1], columns[i][2], columns[i][3]);
 
 		int thisBig = (rowProd > colProd) ? rowProd : colProd;
 
