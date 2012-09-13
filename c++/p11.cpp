@@ -1,16 +1,29 @@
 #include <iostream>
 #include "timer.h"
 
-int getProduct(int a, int b, int c, int d)
+struct Biggest {
+	static int bigint;
+	static void SetBiggest(const int& z)
+	{
+		if (z > bigint)
+			bigint = z;
+	}
+};
+
+int Biggest::bigint = 0;
+
+void calcProduct(const int& a, const int& b, const int& c, const int& d)
 {
 	int product = a * b * c * d;
-	return product;
+	Biggest::SetBiggest(product);
 }
+
 
 int main()
 {
 	using namespace std;
 	Timer::start();
+
 
 	int rows[20][20] = {
 		{ 8, 2,22,97,38,15, 0,40, 0,75, 4, 5, 7,78,52,12,50,77,91, 8},
@@ -46,38 +59,23 @@ int main()
 
 	for (unsigned int i=0; i < 17; ++i) {
 		// first, do rows and cols
-		int rowProd = getProduct(rows[i][0], rows[i][1], rows[i][2], rows[i][3]);
-		int colProd = getProduct(columns[i][0], columns[i][1], columns[i][2], columns[i][3]);
-
-		int thisBig = (rowProd > colProd) ? rowProd : colProd;
-
-		if (thisBig > biggest)
-			biggest = thisBig;
+		calcProduct(rows[i][0], rows[i][1], rows[i][2], rows[i][3]);
+		calcProduct(columns[i][0], columns[i][1], columns[i][2], columns[i][3]);
 	}
 
-	// NW-SE diags
 	for (unsigned int i = 0; i < 17; ++i)
 	{
 		// NW-SE diags
 		for (unsigned int j = 0; j < 17; ++j)
-		{
-			int diagProd = getProduct(rows[i][j], rows[i+1][j+1], rows[i+2][j+2], rows[i+3][j+3]);
-			if (diagProd > biggest)
-				biggest = diagProd;
-
-		}
+			calcProduct(rows[i][j], rows[i+1][j+1], rows[i+2][j+2], rows[i+3][j+3]);
 
 		// NE-SW diags
 		for (unsigned int j = 3; j < 20; ++j)
-		{
-			int diagProd = getProduct(rows[i][j], rows[i+1][j-1], rows[i+2][j-2], rows[i+3][j-3]);
-			if (diagProd > biggest)
-				biggest = diagProd;
-
-		}
+			calcProduct(rows[i][j], rows[i+1][j-1], rows[i+2][j-2], rows[i+3][j-3]);
 
 	}	
 
 	printf("Biggest = %i\n", biggest);
+	printf("Biggest from setBiggest = %i\n", Biggest::bigint);
 	Timer::stop();
 }
