@@ -11,16 +11,17 @@ int main()
 	using namespace std;
 	Timer::start();
 
-	int a, b, c;
+	short a, b, c;
 
-	for (int m = sqrt(500); m > 0; --m)
+	for (short m = sqrt(500); m > 0; --m)
 	{
-		for (int n = 1; n < m; ++n)
+		for (short n = 1; n < m; ++n)
 		{
-			int prod = (m*m + m*n);
+			short prod = (m*m + m*n);
 			if (prod > 500)
 				continue;
-			if (prod == 500) {
+			if (prod == 500)
+			{
 				a = m*m - n*n;
 				b = 2 * m * n;
 				c = m*m + n*n;
@@ -29,7 +30,8 @@ int main()
 		}
 	}
 
-	cout << "Pythagorean triple: " << a << ", " << b << ", " << c << endl;
+	//cout << "Pythagorean triple: " << a << ", " << b << ", " << c << endl;
+	printf ("Pythagorean triple: {%i, %i, %i}\n", a, b, c);
 	cout << "Sum = " << a + b + c << endl;
 	cout << "Product = " << a * b * c << endl;
 
